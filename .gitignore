@@ -5,6 +5,7 @@ __pycache__/
 venv/
 data/*.xlsx
 data/*.xls
+data/demo/
 *.xlsx
 !data/.gitkeep
 .DS_Store

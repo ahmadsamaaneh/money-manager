@@ -38,7 +38,13 @@
         />
       </label>
 
-      <button type="submit">دخول</button>
+      <button type="submit">دخول الحساب الأصلي</button>
+    </form>
+
+    <form class="login-card demo-card" method="post" action="{{ url_for('login_demo') }}">
+      <h2>حساب تجريبي</h2>
+      <p>جرّب البرنامج بدون ما يتأثر حسابك. عند الخروج بتنمسح كل بيانات التجربة.</p>
+      <button type="submit" class="demo-btn">دخول تجريبي</button>
     </form>
   </main>
 </body>

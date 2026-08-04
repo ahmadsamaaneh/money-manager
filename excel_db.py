@@ -11,8 +11,52 @@ from typing import Any
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
-DATA_DIR = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parent / "data"))
+BASE_DATA_DIR = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parent / "data"))
+DATA_DIR = BASE_DATA_DIR
 EXCEL_PATH = DATA_DIR / "money.xlsx"
+DEMO_DIR = BASE_DATA_DIR / "demo"
+
+
+def activate_real() -> None:
+    global DATA_DIR, EXCEL_PATH
+    DATA_DIR = BASE_DATA_DIR
+    EXCEL_PATH = DATA_DIR / "money.xlsx"
+
+
+def activate_demo(demo_id: str) -> Path:
+    global DATA_DIR, EXCEL_PATH
+    safe_id = "".join(ch for ch in str(demo_id) if ch.isalnum() or ch in {"-", "_"})
+    if not safe_id:
+        raise ValueError("معرف تجريبي غير صالح")
+    DATA_DIR = DEMO_DIR
+    DEMO_DIR.mkdir(parents=True, exist_ok=True)
+    EXCEL_PATH = DEMO_DIR / f"{safe_id}.xlsx"
+    return EXCEL_PATH
+
+
+def start_demo_session(demo_id: str) -> Path:
+    """Create a fresh disposable workbook for a demo session."""
+    path = activate_demo(demo_id)
+    if path.exists():
+        path.unlink()
+    _ensure_workbook()
+    set_total_balance(1000, "رصيد تجريبي للتجربة")
+    set_daily_limit(50)
+    set_spend_budget(200)
+    add_obligation(
+        "فاتورة تجريبية",
+        25,
+        min(date.today().day, 28),
+        "مثال — يُحذف عند الخروج",
+    )
+    return path
+
+
+def destroy_demo_session(demo_id: str) -> None:
+    path = activate_demo(demo_id)
+    if path.exists():
+        path.unlink(missing_ok=True)
+    activate_real()
 
 SHEET_SETTINGS = "الإعدادات"
 SHEET_TRANSACTIONS = "الحركات"

@@ -80,6 +80,52 @@ body {
   font-size: 0.92rem;
 }
 
+.login-wrap {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.demo-card {
+  text-align: center;
+}
+
+.demo-card h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.demo-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.demo-btn {
+  border: 1px solid var(--line) !important;
+  background: #fff !important;
+  color: var(--teal-deep) !important;
+}
+
+.demo-btn:hover {
+  border-color: var(--teal) !important;
+  background: #f0fdfa !important;
+}
+
+.demo-banner {
+  max-width: 1180px;
+  margin: 0 auto 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  color: #9a3412;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  animation: rise 0.45s ease both;
+}
+
 .top-actions {
   display: flex;
   align-items: center;

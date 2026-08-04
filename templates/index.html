@@ -29,10 +29,16 @@
         <span class="badge" id="notifBadge" hidden>0</span>
       </button>
       <form method="post" action="{{ url_for('logout') }}">
-        <button type="submit" class="logout-btn">خروج</button>
+        <button type="submit" class="logout-btn">{% if is_demo %}خروج من التجربة{% else %}خروج{% endif %}</button>
       </form>
     </div>
   </header>
+
+  {% if is_demo %}
+  <div class="demo-banner">
+    وضع تجريبي — أي تعديل هون للتجربة فقط، وما بينحفظ على حسابك الأصلي. عند الخروج بتنمسح البيانات.
+  </div>
+  {% endif %}
 
   <aside class="notif-panel" id="notifPanel" hidden>
     <div class="notif-head">
