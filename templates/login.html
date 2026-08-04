@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دخول — Money Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="login-body">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main class="login-wrap">
+    <form class="login-card" method="post" action="{{ url_for('login_post') }}">
+      <div class="brand login-brand">
+        <span class="brand-mark">MM</span>
+        <div>
+          <h1>Money Manager</h1>
+          <p>أدخل كلمة السر للمتابعة</p>
+        </div>
+      </div>
+
+      {% if error %}
+      <p class="login-error">{{ error }}</p>
+      {% endif %}
+
+      <label>كلمة السر
+        <input
+          type="password"
+          name="password"
+          inputmode="numeric"
+          autocomplete="current-password"
+          placeholder="••••"
+          required
+          autofocus
+        />
+      </label>
+
+      <button type="submit">دخول</button>
+    </form>
+  </main>
+</body>
+</html>
